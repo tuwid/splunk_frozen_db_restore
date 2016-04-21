@@ -13,7 +13,7 @@ splunkbin = '/opt/splunk/bin/'
 debug = 0
 
 print "We're using the default index path, for custom indexes please adjust the path variable here"
-
+print "Uncomment the system calls at the end for the actual execution "
 # TODO: check for root here ?
 
 index = raw_input('Enter index:').rstrip('\n')
@@ -87,10 +87,10 @@ print "[+] Copying databases into thaweddb.."
 for db in restore_list:
   if debug:
     print "Executing: " + "cp -R " + frozenpath + db + " " + path + index + "/thaweddb/" 
-  call(["cp","-R " + frozenpath + db + " " + path + index + "/thaweddb/"])
+  #call(["cp","-R " + frozenpath + db + " " + path + index + "/thaweddb/"])
 
 print "[+] Rebuilding DBs"
 for db in restore_list:
   if debug:
     print "Executing: " + splunkbin +  "splunkd fsck  repair --one-bucket --include-hots --bucket-path=" + path + index + "/thaweddb/" + db + " --log-to--splunkd-log"
-  call([splunkbin + "splunkd", "fsck  repair --one-bucket --include-hots --bucket-path=" + path + index + "/thaweddb/" + db + " --log-to--splunkd-log"])
+  #call([splunkbin + "splunkd", "fsck  repair --one-bucket --include-hots --bucket-path=" + path + index + "/thaweddb/" + db + " --log-to--splunkd-log"])
